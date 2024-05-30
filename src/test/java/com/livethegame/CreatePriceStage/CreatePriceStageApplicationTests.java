@@ -43,7 +43,7 @@ class CreatePriceStageApplicationTests {
         PriceStageRequest request = new PriceStageRequest();
         PriceStageResponse response = new PriceStageResponse();
         response.setId(1L);
-        mockMvc.perform(MockMvcRequestBuilders.post("/priceStages/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/price-stages/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -56,7 +56,7 @@ class CreatePriceStageApplicationTests {
 
     @Test
     public void testCreatePriceStage_Business_WithoutAuthorization() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/priceStages/create")
+        mockMvc.perform(MockMvcRequestBuilders.get("/price-stages/create")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
     }
@@ -65,7 +65,7 @@ class CreatePriceStageApplicationTests {
     public void testCreatePriceStage_Business_testUnauthorizedAccess() throws Exception {
         Base64.Encoder encoder = Base64.getEncoder();
         String encodingParaUsuarioSinPermiso = encoder.encodeToString(("usuario" + ":" + "password").getBytes());
-        mockMvc.perform(MockMvcRequestBuilders.get("/priceStages/create")
+        mockMvc.perform(MockMvcRequestBuilders.get("/price-stages/create")
                         .header("Authorization", "Basic " + encodingParaUsuarioSinPermiso)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());

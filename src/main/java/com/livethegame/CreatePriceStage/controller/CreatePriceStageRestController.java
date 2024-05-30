@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "Api Create Price Stage")
 @RestController
-@RequestMapping("/priceStages")
+@RequestMapping("/price-stages")
 public class CreatePriceStageRestController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class CreatePriceStageRestController {
     public ResponseEntity<?> createPriceStage(@RequestBody PriceStageRequest input) {
         try {
             PriceStageResponse PriceStageResponse = priceStageService.createPriceStage(input);
-            monitoringService.registerSuccessLog(String.valueOf(""),"/create "+input.toString()+" "+ PriceStageResponse);
+            monitoringService.registerSuccessLog("","/create "+input.toString()+" "+ PriceStageResponse);
             return ResponseEntity.ok(PriceStageResponse);
         } catch (ServiceNotFoundException e) {
             monitoringService.registerControlledExceptionLog("","/create "+input.toString()+" "+e.getMessage());
